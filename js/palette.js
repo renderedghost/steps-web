@@ -1,8 +1,17 @@
-document.getElementById('colorForm').addEventListener('submit', function (event) {
+document.getElementById('hexForm').addEventListener('submit', function (event) {
     event.preventDefault();
+    processHexForm();
+});
+
+document.getElementById('hslForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    processHslForm();
+});
+
+function processHexForm() {
     let startHex = document.getElementById('startColor').value;
     let endHex = document.getElementById('endColor').value;
-    let numColors = parseInt(document.getElementById('numColors').value);
+    let numColors = parseInt(document.getElementById('numColorsHex').value);
 
     let startRgb = hexToRgb(startHex);
     let endRgb = hexToRgb(endHex);
@@ -12,15 +21,42 @@ document.getElementById('colorForm').addEventListener('submit', function (event)
 
     let results = generatePalette(startHsl, endHsl, numColors);
     displayResults(results);
-});
+}
 
-function interpolate(value1, value2, steps) {
-    let step = (value2 - value1) / (steps + 1);
-    let values = [];
-    for (let i = 0; i <= steps + 1; i++) {
-        values.push(value1 + step * i);
+function processHslForm() {
+    let startHsl = [
+        parseInt(document.getElementById('startHue').value) / 360,
+        parseInt(document.getElementById('startSaturation').value) / 100,
+        parseInt(document.getElementById('startLightness').value) / 100
+    ];
+    let endHsl = [
+        parseInt(document.getElementById('endHue').value) / 360,
+        parseInt(document.getElementById('endSaturation').value) / 100,
+        parseInt(document.getElementById('endLightness').value) / 100
+    ];
+    let numColors = parseInt(document.getElementById('numColorsHSL').value);
+
+    let results = generatePalette(startHsl, endHsl, numColors);
+    displayResults(results);
+}
+
+function switchTab(tab) {
+    let hexForm = document.getElementById('hexForm');
+    let hslForm = document.getElementById('hslForm');
+    let hexTab = document.querySelector('.tab:nth-child(1)');
+    let hslTab = document.querySelector('.tab:nth-child(2)');
+
+    if (tab === 'hex') {
+        hexForm.style.display = '';
+        hslForm.style.display = 'none';
+        hexTab.classList.add('active-tab');
+        hslTab.classList.remove('active-tab');
+    } else {
+        hslForm.style.display = '';
+        hexForm.style.display = 'none';
+        hslTab.classList.add('active-tab');
+        hexTab.classList.remove('active-tab');
     }
-    return values;
 }
 
 function generatePalette(startHsl, endHsl, numColors) {
