@@ -21,6 +21,69 @@
 			<h1>Steps</h1>
 			<p>Plot the path between Colours</p>
 			<!-- Form -->
+
+			<div class="tabs">
+				<span class="tab active-tab" onclick="switchTab('hex')"
+					>HEX</span
+				>
+				<span class="tab" onclick="switchTab('hsl')">HSL</span>
+			</div>
+			<!-- Hex Calc -->
+			<form id="hexForm">
+				<label for="startColor">Start Color (hex): #</label>
+				<input type="text" id="startColor" required />
+				<label for="endColor">End Color (hex): #</label>
+				<input type="text" id="endColor" required />
+				<label for="numColorsHex">Number of Colors:</label>
+				<input type="number" id="numColorsHex" min="1" required />
+				<button type="submit">Generate Palette</button>
+			</form>
+
+			<!-- HSL Calc -->
+			<form id="hslForm" style="display: none">
+				<label for="startHue">Start Hue:</label>
+				<input type="number" id="startHue" required min="0" max="360" />
+				<label for="startSaturation">Start Saturation (%):</label>
+				<input
+					type="number"
+					id="startSaturation"
+					required
+					min="0"
+					max="100"
+				/>
+				<label for="startLightness">Start Lightness (%):</label>
+				<input
+					type="number"
+					id="startLightness"
+					required
+					min="0"
+					max="100"
+				/>
+
+				<label for="endHue">End Hue:</label>
+				<input type="number" id="endHue" required min="0" max="360" />
+				<label for="endSaturation">End Saturation (%):</label>
+				<input
+					type="number"
+					id="endSaturation"
+					required
+					min="0"
+					max="100"
+				/>
+				<label for="endLightness">End Lightness (%):</label>
+				<input
+					type="number"
+					id="endLightness"
+					required
+					min="0"
+					max="100"
+				/>
+
+				<label for="numColorsHSL">Number of Colors:</label>
+				<input type="number" id="numColorsHSL" min="1" required />
+				<button type="submit">Generate Palette</button>
+			</form>
+			<!-- Old Form -->
 			<form style="display: none">
 				<!-- Value -->
 				<div class="form-group">
@@ -75,15 +138,6 @@
 						Copy to Clipboard
 					</button>
 				</div>
-			</form>
-			<form id="colorForm">
-				<label for="startColor">Start Color (hex): #</label>
-				<input type="text" id="startColor" required />
-				<label for="endColor">End Color (hex): #</label>
-				<input type="text" id="endColor" required />
-				<label for="numColors">Number of Colors:</label>
-				<input type="number" id="numColors" min="1" required />
-				<button type="submit">Generate Palette</button>
 			</form>
 		</main>
 		<aside>
